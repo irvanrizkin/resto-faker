@@ -22,6 +22,7 @@ export class RestaurantService {
     return await this.prisma.restaurant.findMany({
       include: {
         images: true,
+        reviews: true,
       },
     });
   }
