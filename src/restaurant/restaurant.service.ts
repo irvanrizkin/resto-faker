@@ -19,7 +19,11 @@ export class RestaurantService {
   }
 
   async findAll() {
-    return await this.prisma.restaurant.findMany();
+    return await this.prisma.restaurant.findMany({
+      include: {
+        images: true,
+      },
+    });
   }
 
   async findOne(id: string) {
