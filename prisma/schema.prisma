@@ -12,13 +12,14 @@ datasource db {
 }
 
 model Restaurant {
-  id      String   @id
-  name    String   @default("")
-  price   Int      @default(0)
-  rating  Float    @default(0.0)
-  status  Boolean  @default(true)
-  images  Image[]
-  reviews Review[]
+  id         String     @id
+  name       String     @default("")
+  price      Int        @default(0)
+  rating     Float      @default(0.0)
+  status     Boolean    @default(true)
+  images     Image[]
+  reviews    Review[]
+  categories Category[]
 
   @@map("restaurant")
 }
@@ -45,4 +46,12 @@ model Review {
 
   @@index([restaurantId])
   @@map("review")
+}
+
+model Category {
+  id          String       @id
+  name        String       @default("")
+  restautants Restaurant[]
+
+  @@map("category")
 }

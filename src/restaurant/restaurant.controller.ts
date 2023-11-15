@@ -42,4 +42,12 @@ export class RestaurantController {
   remove(@Param('id') id: string) {
     return this.restaurantService.remove(id);
   }
+
+  @Patch(':id/connect/:categoryId')
+  connectCategory(
+    @Param('id') id: string,
+    @Param('categoryId') categoryId: string,
+  ) {
+    return this.restaurantService.connectCategory(id, categoryId);
+  }
 }

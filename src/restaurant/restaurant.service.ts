@@ -23,6 +23,7 @@ export class RestaurantService {
       include: {
         images: true,
         reviews: true,
+        categories: true,
       },
     });
   }
@@ -48,6 +49,24 @@ export class RestaurantService {
     return await this.prisma.restaurant.delete({
       where: {
         id,
+      },
+    });
+  }
+
+  async connectCategory(id: string, categoryId: string) {
+    return await this.prisma.restaurant.update({
+      where: {
+        id,
+      },
+      data: {
+        categories: {
+          connect: {
+            id: categoryId,
+          },
+        },
+      },
+      include: {
+        categories: true,
       },
     });
   }
