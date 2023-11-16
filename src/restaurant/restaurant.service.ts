@@ -27,6 +27,22 @@ export class RestaurantService {
     });
   }
 
+  async findAllByCategory(categoryId: string) {
+    return await this.prisma.restaurant.findMany({
+      where: {
+        categories: {
+          some: {
+            id: categoryId,
+          },
+        },
+      },
+      include: {
+        images: true,
+        categories: true,
+      },
+    });
+  }
+
   async findOne(id: string) {
     return await this.prisma.restaurant.findFirst({
       where: {

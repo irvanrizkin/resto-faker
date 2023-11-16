@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { RestaurantService } from './restaurant.service';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
@@ -21,8 +22,11 @@ export class RestaurantController {
   }
 
   @Get()
-  findAll() {
-    return this.restaurantService.findAll();
+  async findAll(@Query('categoryId') categoryId: string) {
+    if (!categoryId) {
+      return await this.restaurantService.findAll();
+    }
+    return await this.restaurantService.findAllByCategory(categoryId);
   }
 
   @Get(':id')
