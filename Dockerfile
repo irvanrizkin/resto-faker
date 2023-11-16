@@ -25,6 +25,6 @@ COPY .env ./
 
 RUN npm install --only=production
 
-RUN npm prisma generate
+RUN npm run prisma generate
 
 CMD ["npm", "run", "start:prod"]
