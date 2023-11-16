@@ -22,7 +22,6 @@ export class RestaurantService {
     return await this.prisma.restaurant.findMany({
       include: {
         images: true,
-        reviews: true,
         categories: true,
       },
     });
@@ -32,6 +31,11 @@ export class RestaurantService {
     return await this.prisma.restaurant.findFirst({
       where: {
         id,
+      },
+      include: {
+        images: true,
+        categories: true,
+        reviews: true,
       },
     });
   }
