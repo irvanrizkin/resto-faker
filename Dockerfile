@@ -1,30 +1,15 @@
 # STAGE 1 : Build
 
-FROM node:18-alpine AS build
+FROM node:18-alpine
 
-WORKDIR /app
-
-COPY package*.json ./
-
-RUN npm install
+WORKDIR /usr/src/app
 
 COPY . .
 
-RUN npm run build
-
-# STAGE 2 : Running
-
-FROM node:18-alpine
-
-WORKDIR /app
-
-COPY --from=build /app/dist ./dist
-COPY --from=build /app/package*.json ./
-
-COPY .env ./
-
-RUN npm install --only=production
+RUN npm install
 
 RUN npx prisma generate
+
+RUN npm run build
 
 CMD ["npm", "run", "start:prod"]
